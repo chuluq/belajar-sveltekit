@@ -2,5 +2,6 @@
 	const { data } = $props();
 </script>
 
-<h1>Wallet</h1>
-<p>{data.user}</p>
+<h1>Wallet {data.user}</h1>
+<p>Description: {data.description}</p>
+<p>Balance: {data.balance}</p>
