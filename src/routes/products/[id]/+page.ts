@@ -1,7 +1,6 @@
 import type { LoadEvent } from '@sveltejs/kit';
 
-export function load({ params }: LoadEvent) {
-	return {
-		id: params.id
-	};
+export async function load({ params, fetch }: LoadEvent) {
+	const response = await fetch(`/api/products/${params.id}.json`);
+	return await response.json();
 }
