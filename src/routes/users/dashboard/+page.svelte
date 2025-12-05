@@ -1,14 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	async function current() {
-		const response = await fetch('/api/users/current');
-		if (response.ok) {
-			return await response.json();
-		} else {
-			await goto('/users/login');
-		}
-	}
+	const { data } = $props();
 
 	async function logout() {
 		await fetch('/api/users/current', { method: 'DELETE' });
@@ -16,9 +9,5 @@
 	}
 </script>
 
-{#await current()}
-	Loading user
-{:then data}
-	<h1>Hello {data.user}</h1>
-	<button onclick={logout}>Logout</button>
-{/await}
+<h1>Hello {data.user}</h1>
+<button onclick={logout}>Logout</button>
