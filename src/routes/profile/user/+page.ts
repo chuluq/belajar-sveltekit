@@ -1,8 +1,5 @@
-import type { PageLoad } from './$types';
-
-export const load: PageLoad = () => {
+export const load = () => {
 	return {
-		user: 'chuluq',
 		name: 'Moch Chaerul Chuluq',
 		email: 'chuluq@test.com'
 	};
