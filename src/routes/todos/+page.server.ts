@@ -1,4 +1,4 @@
-import type { RequestEvent } from '@sveltejs/kit';
+import { fail, type RequestEvent } from '@sveltejs/kit';
 
 let lastId = 0;
 let todos: { id: number; name: string }[] = [];
@@ -14,6 +14,9 @@ export const actions = {
 		const form = await request.formData();
 		const todo = form.get('todo');
 
+		if (typeof todo === 'string' && todo.trim() === '') {
+			return fail(400, { error: true, message: 'Todo cannot be empty' });
+		}
 		if (typeof todo === 'string' && todo.trim()) {
 			todos.push({ id: lastId++, name: todo });
 		}

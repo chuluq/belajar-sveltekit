@@ -1,12 +1,14 @@
 <script lang="ts">
-	const { data } = $props();
+	const { data, form } = $props();
 </script>
 
 <form action="?/add" method="post">
-	<label for="todo">
-		Todo:
-		<input type="text" name="todo" id="todo" />
-	</label>
+	{#if form?.error}
+		<label for="todo" style="color: red;">{form?.message}</label>
+	{:else}
+		<label for="todo"> Todo: </label>
+	{/if}
+	<input type="text" name="todo" id="todo" />
 	<button type="submit">Add</button>
 </form>
 
