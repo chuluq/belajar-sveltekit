@@ -1,7 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 
 let lastId = 0;
-const todos: { id: number; name: string }[] = [];
+let todos: { id: number; name: string }[] = [];
 
 export function load() {
 	return {
@@ -10,12 +10,18 @@ export function load() {
 }
 
 export const actions = {
-	default: async ({ request }: RequestEvent) => {
+	add: async ({ request }: RequestEvent) => {
 		const form = await request.formData();
 		const todo = form.get('todo');
 
 		if (typeof todo === 'string' && todo.trim()) {
 			todos.push({ id: lastId++, name: todo });
 		}
+	},
+
+	delete: async ({ request }: RequestEvent) => {
+		const data = await request.formData();
+		const id = Number(data.get('id'));
+		todos = todos.filter((t) => t.id !== id);
 	}
 };
