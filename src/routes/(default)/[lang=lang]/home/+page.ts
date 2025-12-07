@@ -5,7 +5,7 @@ export const load = ({ params }: { params: { lang: string } }) => {
 		fn: 'Hola'
 	};
 
-	const lang = params.lang in hello ? params.lang : 'id';
+	const lang = params.lang;
 
 	return {
 		hello: hello[lang as keyof typeof hello]
